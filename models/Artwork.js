@@ -16,7 +16,7 @@ const artworkSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  comments: [
+  critics: [
     {
       text: {
         type: String,

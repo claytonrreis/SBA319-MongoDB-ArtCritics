@@ -1,8 +1,6 @@
 const express = require("express");
 const connectDB = require("./DB/connectDB");
-// const Artist = require("./models/Artistis");
 const ejs = require("ejs");
-const multer = require("multer");
 const path = require("path");
 require("dotenv").config();
 const multerRoute = require("./routes/multer");
@@ -11,20 +9,20 @@ const starterArtists = require("./DB/ArtistsSeed");
 const artistRoute = require("./routes/artists");
 const Artwork = require("./models/Artwork");
 const artworkRoute = require("./routes/artworks");
-const commentsRoute = require("./routes/comments");
+const criticsRoute = require("./routes/critics");
 
 connectDB();
 
 const app = express();
 const PORT = process.env.PORT;
 
-// Serve static files from 'uploads' directory
 app.use(express.static(path.join(__dirname, "uploads")));
 
 //MIDDLEWARE FUNCTIONS
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
+app.use(express.static(path.join(__dirname, "public")));
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
@@ -32,23 +30,7 @@ app.set("views", path.join(__dirname, "views"));
 app.use("/api/multer", multerRoute);
 app.use("/api/artist", artistRoute);
 app.use("/api/artwork", artworkRoute);
-app.use("/api", commentsRoute);
-
-// app.get("/", (req, res) => {
-//   res.send("Home route!");
-// });
-
-// app.get("/", async (req, res) => {
-//   try {
-//     // Fetch artwork data from the database
-//     const artworks = await Artwork.find();
-
-//     // Render the index.ejs template and pass the artwork data
-//     res.render("index", { artworks: artworks });
-//   } catch (error) {
-//     res.status(500).send("Server error");
-//   }
-// });
+app.use("/api", criticsRoute);
 
 app.get("/", async (req, res) => {
   try {

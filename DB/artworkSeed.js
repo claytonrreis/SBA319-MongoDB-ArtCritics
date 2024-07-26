@@ -14,7 +14,7 @@ const seedData = async () => {
       image: "uploads/FirstPieceClayton.jpg",
       description: "This is the first artwork.",
       artistName: "Artist Name",
-      comments: [
+      critics: [
         {
           text: "Great artwork!",
           artistName: "@gabby1",
