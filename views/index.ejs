@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ArtCritics</title>
+    <link rel="stylesheet" href="styles/styles.css" />
+  </head>
+  <body>
+    <div class="gallery">
+      <h1>Artwork Gallery</h1>
+
+      <!-- Iterate over each artwork -->
+      <% artworks.forEach(artwork => { %>
+      <div class="artwork">
+        <h2><%= artwork.title %></h2>
+        <div class="artwork-image">
+          <!-- Display artwork image with a fallback -->
+          <img src="<%= artwork.image %>" alt="<%= artwork.title %>" />
+        </div>
+        <p><%= artwork.description %></p>
+        <p>By <%= artwork.artistName %></p>
+
+        <!-- Display comments -->
+        <div class="comments">
+          <% if (artwork.comments && artwork.comments.length > 0) { %>
+          <h3>Comments</h3>
+          <% artwork.comments.forEach(comment => { %>
+          <div class="comment">
+            <p><%= comment.text %></p>
+            <p>By <%= comment.artistName %></p>
+          </div>
+          <% }) %> <% } else { %>
+          <p>No comments yet</p>
+          <% } %>
+        </div>
+
+        <!-- Form to add a new comment -->
+        <form action="/api/artwork/<%= artwork._id %>/comments" method="POST">
+          <input
+            type="text"
+            name="artistName"
+            placeholder="Your username"
+            required
+          />
+          <input
+            type="text"
+            name="text"
+            placeholder="Add a comment..."
+            required
+          />
+          <button type="submit">Add Comment</button>
+        </form>
+      </div>
+      <% }) %>
+
+      <!-- Form to add a new artwork -->
+      <div class="new-artwork">
+        <h2>Add New Artwork</h2>
+        <form
+          action="/api/multer/upload"
+          method="POST"
+          enctype="multipart/form-data"
+        >
+          <input
+            type="text"
+            name="title"
+            placeholder="Artwork title"
+            required
+          />
+          <input
+            type="text"
+            name="description"
+            placeholder="Artwork description"
+            required
+          />
+          <input
+            type="text"
+            name="artistName"
+            placeholder="Artist name"
+            required
+          />
+          <input type="file" name="image" accept="image/*" required />
+          <button type="submit">Upload Artwork</button>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
