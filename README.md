@@ -1,9 +1,9 @@
 **ArtCritics**
 
-_Overview_
+*Overview*
 The ArtCritics is a Node.js application that allows users to upload and view artwork, including images and descriptions. Users can also comment on the artworks. The application uses MongoDB for data storage and EJS for rendering views.
 
-_Features_
+*Features*
 Upload artwork with images and descriptions.
 View a gallery of artworks.
 Add and view comments on artworks.
@@ -13,12 +13,13 @@ Prerequisites
 Node.js (v14 or higher)
 MongoDB
 
-_API Endpoints_
+*API Endpoints*
 GET /api/artwork: Fetch all artworks.
 POST /api/artwork/upload: Upload a new artwork.
 POST /api/artwork/
 /comments: Add a comment to an artwork.
-File Structure
+
+*File Structure*
 server.js: Entry point for the application.
 models/Artwork.js: Mongoose model for artwork.
 models/Artists.js: Mongoose model for artists.
